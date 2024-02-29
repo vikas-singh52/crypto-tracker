@@ -1,12 +1,12 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const FetchEachCoin = createAsyncThunk("eachcoin/fetch", 
+import axios from 'axios'
+const FetchEachCoin = createAsyncThunk("eachCoin/fetch", 
      async (ecoin) => {
      const url = `https://api.coingecko.com/api/v3/coins/${ecoin}`
-       const res = await fetch(url)
-       const data = await res.json()
-       return data
+       const res = await axios.get(url)
+       console.log("calling Function",res.data)
+       return res.data
      }
 
 )

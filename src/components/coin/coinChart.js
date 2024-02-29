@@ -1,8 +1,12 @@
 import styles from './CoinChart.module.css'
 import {Line} from 'react-chartjs-2'
 import { Chart as Chartjs } from 'chart.js/auto'
+import { useEffect, useState } from 'react'
+import GetCoinPrice from '../../functions/getPriceData'
+import { ToDate } from '../../functions/convertToDate'
 
-const CoinChart = () => {
+const CoinChart = ({coinId}) => {
+  const [chartData, setChartData] = useState([])
   const labelsData = [
     {
       month: "29/1"
@@ -142,25 +146,26 @@ const CoinChart = () => {
       data: "5"
     }
   ]
+   useEffect( async ()=>{
+    const chartData = await GetCoinPrice(coinId)
+    setChartData(chartData)
+    console.log("chart:",chartData)
+    
+  },[])
+  
   return (
     < div className={styles.chart}>
       Hello coin chart
       <Line
        data = {{
-        labels: labelsData.map((ele)=> ele.month) ,
+        labels: chartData?.map((ele)=> ToDate(ele[0])) ,
         datasets: [
         {
           label: "coin",
-          data: subData.map((ele)=>ele.data),
+          data: chartData?.map((ele)=> (ele[1])),
           backgroundColor: "blue",
           borderColor: "blue"
         },
-        {
-          label: "jain",
-          data: [1,2,2,3,5,3,2,1,6,4],
-          backgroundColor: "orange",
-          borderColor: "orange"
-        }
         ],
        }}
       />

@@ -4,9 +4,7 @@ import './coinDivStyle.css'
 const CoinDiv = () => {
 
   const {data,error} = useSelector(s=>s.eachcoin)
-  console.log("error",error)
-  console.log("coin",data)
-
+  console.log("coinDiv: ",data)
   return (
     < div className='card-div' >
       <div className="coin-card">
@@ -23,6 +21,7 @@ const CoinDiv = () => {
         <p>$19,301,225,370</p>
         <p>$380,148,578,723</p>
       </div>
+      
     </div>
   )
 }

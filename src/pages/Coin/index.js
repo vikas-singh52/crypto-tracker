@@ -1,28 +1,38 @@
 import CoinChart from "../../components/coin/coinChart"
-// import CoinDesc from "../../components/coin/coinDesc"
+import CoinDesc from "../../components/coin/coinDesc"
 import Header from "../../components/common/header"
 import CoinDiv from "../../components/coin/coinDiv"
 import { useParams } from "react-router-dom"
-import {useDispatch} from "react-redux"
-import { useEffect } from "react"
-import FetchAEachCoin from "../../redux-toolkit/actions/eachCoin"
+import {useDispatch, useSelector} from "react-redux"
+import { useEffect, useState } from "react"
+import FetchEachCoin from "../../redux-toolkit/actions/eachCoin"
 
 const Coin = () => {
-
-    
+  const [ren, setRen] = useState(false)
     const {coinId} = useParams()
     const dispatch = useDispatch()
-    useEffect(()=>{
-      
-        dispatch(FetchAEachCoin(coinId))
+
+    useEffect(async()=>{
+
+      await dispatch(FetchEachCoin(coinId))
+      setRen(true)
     },[])
 
   return (
     < div >
       <Header/>
-      {/* <CoinDiv/> */}
-      <CoinChart/>
-      {/* <CoinDesc/> */}
+      
+        
+        {
+          ren ? <CoinDiv/>:<></>
+        }
+       
+        
+        
+      <CoinChart coinId={coinId}/>
+      {
+          ren ? <CoinDesc/>:<></>
+        }
     </div>
   )
 }

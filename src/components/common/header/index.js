@@ -2,9 +2,11 @@
 
 import Button from '../button';
 import '../header/style.css'
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
+  const navigate = useNavigate()
   function toggleTheme(){
     document.body.classList.toggle("dark")
   }
@@ -14,10 +16,10 @@ const Header = () => {
       <div className='header-list'>
         <ul>
             <li className="material-symbols-outlined" onClick={toggleTheme}>toggle_on</li>
-            <li>Home</li>
+            <li onClick={()=>navigate('/')}>Home</li>
             <li>Compare</li>
             <li>Whatchlist</li>
-            <li><Button content="Dashboard"/></li>
+            <li><Button content="Dashboard" onClick={()=>navigate('/dashboard')}/></li>
         </ul>
       </div>
     </header>

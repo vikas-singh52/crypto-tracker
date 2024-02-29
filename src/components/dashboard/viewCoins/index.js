@@ -7,13 +7,15 @@ import GridCom from '../grid'
 import ListCom from '../list'
 
 const ViewCoinsCom = () => {
-
+  const [ex, setEx] = useState(false)
   const [whichCom, setWhichCom] = useState(true)
 
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(FetchAllBitcoins())
+     dispatch(FetchAllBitcoins())
+    console.log("viewCoins:")
   },[])
+
   function display(e){
     console.log(e.target.className)
     if(e.target.className == "grid"){

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import './style.css'
 import { useNavigate } from "react-router-dom";
 const ListCom = ()=>{
+  let id= ""
   const {data} = useSelector(state=>state.bitcoins)
   const navigate = useNavigate()
   return(
@@ -14,11 +15,11 @@ const ListCom = ()=>{
                 data?.map((ele,i)=>(
                   <tr key={i} onClick={()=>navigate(`/coin/${ele.id}`)}>
                     <td><img src={ele.image} width="50px" height="50px"/></td>
-                    <td>{ele.symbol}</td>
-                    <td>{ele.id}</td>
+                    <td>{ele.symbol.toUpperCase()}</td>
+                    <td>{id = ele.id.charAt(0).toUpperCase()+ ele.id.slice(1)}</td>
                     <td>${ele.current_price}</td>
-                    <td>{ele.total_volume}</td>
-                    <td>{ele.market_cap}</td>
+                    <td>${ele.total_volume}</td>
+                    <td>${ele.market_cap}</td>
                   </tr>
                 ))
               }

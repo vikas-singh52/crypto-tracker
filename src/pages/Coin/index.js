@@ -12,23 +12,21 @@ const Coin = () => {
     const {coinId} = useParams()
     const dispatch = useDispatch()
 
-    useEffect(async()=>{
-
-      await dispatch(FetchEachCoin(coinId))
+    useEffect(()=>{
+      async function fetchD(){
+        await dispatch(FetchEachCoin(coinId))
       setRen(true)
+      }
+      fetchD()
     },[])
 
   return (
     < div >
       <Header/>
-      
-        
         {
           ren ? <CoinDiv/>:<></>
         }
-       
-        
-        
+ 
       <CoinChart coinId={coinId}/>
       {
           ren ? <CoinDesc/>:<></>

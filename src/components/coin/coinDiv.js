@@ -5,12 +5,13 @@ const CoinDiv = () => {
 
   const {data,error} = useSelector(s=>s.eachcoin)
   console.log("coinDiv: ",data)
+  
   return (
     < div className='card-div' >
       <div className="coin-card">
-        {/* <img src={data.image.thumb} width="50" height="50" alt="coin-img"/> */}
+        <img src={data.image.thumb} width="50" height="50" alt="coin-img"/>
         <div>
-          <h4> {`${data.symbol}-USD`}</h4>
+          <h4> {`${data.symbol.toUpperCase()}-USD`}</h4>
           <p>{data.id}</p>
         </div>
         <div>
@@ -18,8 +19,8 @@ const CoinDiv = () => {
           <button>H</button>
         </div>
         <p>{data.market_data.current_price.usd}</p>
-        <p>$19,301,225,370</p>
-        <p>$380,148,578,723</p>
+        <p>${data.market_data.market_cap.usd}</p>
+        <p>${data.market_data.total_volume.usd}</p>
       </div>
       
     </div>

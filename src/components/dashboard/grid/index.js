@@ -47,19 +47,23 @@ import './style.css'
 import { useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 const GridCom = ()=>{
+  let id=""
   const {isLoad,data, error} = useSelector(state=>state.bitcoins)
-  console.log(isLoad,data,error)
+  console.log("gridCom :",isLoad,data,error)
   const navigate = useNavigate()
   return(
       <div className='cards'>
         {
-        data?.map((ele)=>(
-          <div className='card' onClick={()=>navigate(`/coin/${ele.id}`)}>
+        data?.map((ele,id)=>(
+          <div key={id} className='card' onClick={()=>navigate(`/coin/${ele.id}`)}>
             <div className='img-sec'>
               <img src={ele.image} width="50px" height="50px" alt="pic"/>
               <div>
-                <h1>{ele.symbol}</h1>
-                <p>{ele.id}</p>
+                <h1>{ele.symbol.toUpperCase()}</h1>
+                {
+                   id = ele.id.charAt(0).toUpperCase()+ ele.id.slice(1)
+                }
+                {/* <p>{id}</p> */}
               </div>
             </div>
             <h2>${ele.current_price}</h2>
